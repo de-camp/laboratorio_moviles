@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="start_end_padHorizontal">24dp</dimen>
+    <dimen name="top_margin">96dp</dimen>
+    <dimen name="minBetweenBoxes">8dp</dimen>
+</resources>
