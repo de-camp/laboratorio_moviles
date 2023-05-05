@@ -6,31 +6,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.laboratorio_05.R
+import com.example.laboratorio_05.databinding.FragmentBillboardBinding
+import com.example.laboratorio_05.databinding.FragmentMovieBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class BillboardFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     private lateinit var buttonFirstFragment: FloatingActionButton
     private lateinit var cardViewMovies: CardView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        /*arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }*/
+    private val movieViewModel: MovieViewModel by activityViewModels {
+        MovieViewModel.Factory
     }
 
-    override fun onCreateView(
+    private lateinit var binding: FragmentBillboardBinding
+
+   override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_billboard, container, false)
+       binding = FragmentBillboardBinding.inflate(inflater, container, false)
+       return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,6 +42,8 @@ class BillboardFragment : Fragment() {
         cardViewMovies.setOnClickListener{
             it.findNavController().navigate(R.id.action_billboardFragment_to_movieFragment)
         }
+
+        setViewModel()
     }
 
     private fun bind() {
@@ -50,23 +51,9 @@ class BillboardFragment : Fragment() {
         cardViewMovies = view?.findViewById(R.id.cardView) as CardView
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment billboardFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BillboardFragment().apply {
-                /*arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }*/
-            }
+    private fun setViewModel() {
+        binding.viewmodel = movieViewModel
     }
+
+
 }
