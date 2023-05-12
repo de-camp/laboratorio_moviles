@@ -7,13 +7,13 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.example.laboratorio_05.ui.movie.MovieViewModel" />
+            type="com.example.laboratorio_05.ui.movie.viewmodel.MovieViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.movie.BillboardFragment"
+        tools:context=".ui.movie.billboard.BillboardFragment"
         android:background="@color/backgroundLayout">
 
         <TextView
@@ -29,60 +29,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="360dp"
-            android:layout_height="160dp"
-            app:cardBackgroundColor="@color/cardLayout"
-            android:layout_marginTop="@dimen/start_end_margin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:layout_width="125dp"
-                    android:layout_height="105dp"
-                    app:srcCompat = "@drawable/star_wars"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp">
-
-                </ImageView>
-
-                <LinearLayout
-                    android:layout_width="200dp"
-                    android:layout_height="105dp"
-                    android:orientation="vertical"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Star Wars Episode 3: \nLa venganza de los Sith"
-                        android:textColor="@color/white"
-                        android:textSize="16sp">
-                    </TextView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="9.8"
-                        android:textColor="@color/white"
-                        android:textSize="20sp">
-                    </TextView>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_action_button"
             android:layout_width="wrap_content"
@@ -93,6 +39,20 @@
             app:srcCompat="@drawable/plus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

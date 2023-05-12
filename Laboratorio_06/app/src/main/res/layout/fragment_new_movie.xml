@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.example.laboratorio_05.ui.movie.MovieViewModel" />
+            type="com.example.laboratorio_05.ui.movie.viewmodel.MovieViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.movie.NewMovieFragment"
+        tools:context=".ui.movie.newmovie.NewMovieFragment"
         android:background="@color/backgroundLayout">
 
 

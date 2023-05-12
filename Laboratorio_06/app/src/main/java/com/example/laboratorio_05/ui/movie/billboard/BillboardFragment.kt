@@ -1,4 +1,4 @@
-package com.example.laboratorio_05.ui.movie
+package com.example.laboratorio_05.ui.movie.billboard
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,9 +8,13 @@ import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.laboratorio_05.R
+import com.example.laboratorio_05.data.model.MovieModel
 import com.example.laboratorio_05.databinding.FragmentBillboardBinding
-import com.example.laboratorio_05.databinding.FragmentMovieBinding
+import com.example.laboratorio_05.ui.movie.billboard.recyclerview.MovieRecyclerViewAdapter
+import com.example.laboratorio_05.ui.movie.viewmodel.MovieViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class BillboardFragment : Fragment() {
@@ -22,6 +26,7 @@ class BillboardFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentBillboardBinding
+    private lateinit var adapter: MovieRecyclerViewAdapter
 
    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,26 +39,51 @@ class BillboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bind()
-        buttonFirstFragment.setOnClickListener{
+        /*bind()*/
+
+        setRecyclerView(view)
+        binding.floatingActionButton.setOnClickListener {
+            movieViewModel.clearData()
             it.findNavController().navigate(R.id.action_billboardFragment_to_newMovieFragment)
         }
 
+        /*buttonFirstFragment.setOnClickListener{
+            it.findNavController().navigate(R.id.action_billboardFragment_to_newMovieFragment)
+        }
         cardViewMovies.setOnClickListener{
             it.findNavController().navigate(R.id.action_billboardFragment_to_movieFragment)
-        }
+        }*/
 
         setViewModel()
     }
 
     private fun bind() {
         buttonFirstFragment = view?.findViewById(R.id.floating_action_button) as FloatingActionButton
-        cardViewMovies = view?.findViewById(R.id.cardView) as CardView
+        /*cardViewMovies = view?.findViewById(R.id.cardView) as CardView*/
     }
 
     private fun setViewModel() {
         binding.viewmodel = movieViewModel
     }
 
+    private fun showSelectedItem(movie: MovieModel) {
+        movieViewModel.setSelectedMovie(movie)
+        findNavController().navigate(R.id.action_billboardFragment_to_movieFragment)
+    }
 
+    private fun displayMovies() {
+        adapter.setData(movieViewModel.getMovies())
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun setRecyclerView(view: View) {
+        binding.recyclerView.layoutManager = LinearLayoutManager(view.context)
+
+        adapter = MovieRecyclerViewAdapter { selectedMovie ->
+            showSelectedItem(selectedMovie)
+        }
+
+        binding.recyclerView.adapter = adapter
+        displayMovies()
+    }
 }
